@@ -1,0 +1,33 @@
+<html>
+<body>
+    <div id="buttonParent">
+    </div>
+    <script>
+        //here we will define an object and use that object and change its value and rerender in ui component we can use state.count++ something like that
+        let state={
+            count: 0
+        }
+
+        //
+        function onButtonPress(){
+            state.count++;
+            buttonComponentRender();
+        }
+
+        function buttonComponentRender(){
+            document.getElementById("buttonParent").innerHTML="";
+            const component=buttonComponent(state.count);
+            document.getElementById("buttonParent").appendChild(component);
+        }
+
+//        <button onclick="onButtonPress()">Counter 1</button>
+        function buttonComponent(count){
+            const button =document.createElement("button");
+            button.innerHTML=`Counter ${count}`;
+            button.setAttribute("onclick","onButtonPress()");
+            return button;
+        }
+        buttonComponentRender();
+    </script>
+</body>
+</html>
