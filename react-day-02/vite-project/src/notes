@@ -1,0 +1,78 @@
+import { useState } from "react";
+
+
+export default function App() {
+  return (
+    <>
+    <toggleMessage/>
+    <div style={{ background: "#dfe6e9", height: "100vh" }}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div>
+          <div><PostHandler /><br/></div>
+          <div><PostHandler /><br/></div>
+          <div><PostHandler /><br/></div>
+          <div><PostHandler /><br/></div>
+          <div><PostHandler /><br/></div>
+         <ProfileCard/>
+        </div>
+        
+      </div>
+      <div style={{color:"blue",display:"flex",justifyContent:"center"}}>
+        <ToggleMessage/>
+        </div>
+      {/* <p>Hi there i m jatin 5</p> */}
+    </div></>
+  )
+}
+
+
+function ProfileCard() {
+  return (
+    <div>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <b>Profile Viewer</b>
+          <b>23k Viewer</b>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <b>Profile Impression</b>
+          <b>50K seen</b>
+        </div>
+      </div>
+    </div>
+  );
+}
+const ToggleMessage=()=>{
+  const [vis,setVis]= useState(false);
+  console.log("i m getting rendered");
+  return(
+    <>
+    <button onClick={()=>setVis(!vis)}>Click Me</button>
+    {vis&&<p>Hi i m visible</p>}</>
+  )
+}
+function PostHandler() {
+    const style = { width: 200, backgroundColor: "white", borderColor: "gray", borderRadius: 10, borderWidth: 1, display: "flex" }
+    return (
+      <>
+        <div style={style}>
+          <div style={{ display: "flex" }}>
+            <img src="https://plus.unsplash.com/premium_photo-1683865775849-b958669dca26?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1pbi1zYW1lLXNlcmllc3wxfHx8ZW58MHx8fHx8" alt="" style={{
+              width: 30,
+              height: 30,
+              borderRadius: 20
+            }} />
+          </div>
+          <div style={{ fontSize: 10, marginLeft: 10 }}>
+            <b >Jedex99</b>
+            <div>23K Followers</div>
+            <div>12m</div>
+  
+  
+            <h4>Want to know How to learn react with Shubham</h4>
+          </div>
+        </div>
+      </>
+  
+    )
+  }
