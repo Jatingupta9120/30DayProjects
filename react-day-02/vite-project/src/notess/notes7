@@ -1,0 +1,53 @@
+const items = [
+  { id: 1, name: "Item 1", price: "$10" },
+  { id: 2, name: "Item 2", price: "$15" },
+  { id: 3, name: "Item 3", price: "$20" },
+];
+export const App = () => {
+  return (
+    <div style={{ backgroundColor: "rgb(100,149,237)" }}>
+      <Cart>
+        <h1>Hi I am Jatin</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, esse! Aliquid quis repudiandae totam nisi rerum minus illum ducimus nulla laborum expedita molestiae dolor sint, molestias dolore neque culpa corporis!</p>
+        <ul>
+          {items.map((i) => (
+            <li key={i.id}>
+              {i.name} = {i.price}
+            </li>
+          ))}
+        </ul>
+      </Cart>
+      <Cart>
+        <h1>Hi I am Shubham</h1>
+        <textarea name="" id="" type="text"></textarea>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, esse! Aliquid quis repudiandae totam nisi rerum minus illum ducimus nulla laborum expedita molestiae dolor sint, molestias dolore neque culpa corporis!</p>
+      </Cart>
+      <Cart>
+        <h1>Hi I am Shubham ki Setting</h1>
+        <textarea name="" id="" type="text"></textarea>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, esse! Aliquid quis repudiandae totam nisi rerum minus illum ducimus nulla laborum expedita molestiae dolor sint, molestias dolore neque culpa corporis!</p>
+      </Cart>
+      <Cart>
+        <h1>Hi I am shubham ki Setting2</h1>
+        {/* <textarea name="" id="" type="text"></textarea> */}
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, esse! Aliquid quis repudiandae totam nisi rerum minus illum ducimus nulla laborum expedita molestiae dolor sint, molestias dolore neque culpa corporis!</p>
+      </Cart>
+    </div>
+  )
+}
+export const Cart = ({ children }) => {
+  return (
+    <>
+      <div style={{
+        border: "2px solid #ccc",
+        padding: "20px",
+        margin: "10px",
+        boxShadow: "2px 2px 5px rgba(0,0,0,0.1)"
+      }}>
+        {children}
+      </div>
+    </>
+  )
+}
+
+export { App as default }

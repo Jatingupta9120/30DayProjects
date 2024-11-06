@@ -6,6 +6,7 @@ import Header from './Header';
 export const SignUpPage = () => (
    <div className="bg-black-200">
     <Header />
+    <BackgroundBeams />
   <div className="flex items-center justify-center min-h-screen bg-black">
     <SignupFormDemo />
     {/* <BackgroundBeams /> */}

@@ -1,25 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import './index.css';
-import { ClerkProvider } from '@clerk/clerk-react';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import './index.css'
+import { ClerkProvider } from '@clerk/clerk-react'
+import Header from './components/Header'
 
-// Replace this with your actual Clerk publishable key.
-const PUBLISHABLE_KEY = 'pk_test_c3F1YXJlLXJlcHRpbGUtMTQuY2xlcmsuYWNjb3VudHMuZGV2JA';
+// Import your publishable key
+const PUBLISHABLE_KEY = "pk_test_c3F1YXJlLXJlcHRpbGUtMTQuY2xlcmsuYWNjb3VudHMuZGV2JA";
 
-// Ensure that the publishable key is provided
 if (!PUBLISHABLE_KEY) {
-  throw new Error('Clerk publishable key is missing.');
+  throw new Error('Add your Clerk publishable key to the .env.local file')
 }
 
-// Type assertion is not needed here as we already know 'root' is an HTMLElement
-const rootElement = document.getElementById('root');
-if (!rootElement) {
-  throw new Error('Root element not found.');
-}
-
-ReactDOM.createRoot(rootElement).render(
-  <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-    <App />
-  </ClerkProvider>
-);
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+      {/* <Header /> */}
+      <App />
+    </ClerkProvider>
+  </React.StrictMode>,
+)

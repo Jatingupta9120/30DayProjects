@@ -2,10 +2,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useUser, useClerk } from '@clerk/clerk-react';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const { user } = useUser();
   const { signOut } = useClerk();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/');
+  };
 
   return (
     <nav className="flex items-center justify-between px-6 py-4 mb-5 bg-black">
@@ -35,14 +42,8 @@ const Header = () => {
         )}
         {user && (
           <>
-            <Link
-              to="/profile"
-              className="text-purple-300 hover:text-purple-400 mr-4"
-            >
-              Profile
-            </Link>
             <button
-              onClick={() => signOut()}
+              onClick={handleSignOut}
               className="text-purple-300 hover:text-purple-400"
             >
               Sign Out

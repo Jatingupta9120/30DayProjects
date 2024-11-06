@@ -1,81 +1,72 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { SignedIn, SignedOut, RedirectToSignIn, SignInButton, UserButton } from '@clerk/clerk-react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { SignedIn, SignedOut, RedirectToSignIn, useAuth } from '@clerk/clerk-react';
 import Dashboard from './components/Dashboard';
-import Profile from './components/Profile';
 import SignInPage from './components/SignIn';
 import SignUpPage from './components/SignUp';
 import HomePage from './components/HomePage';
-import Layout from './components/Layout';
+import { Layout } from './components/Layout';
 import './index.css';
+
+// Protected Route wrapper component
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { isSignedIn, isLoaded } = useAuth();
+
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
+
+  if (!isSignedIn) {
+    return <Navigate to="/sign-in" replace />;
+  }
+
+  return <Layout>{children}</Layout>;
+};
 
 const App = () => {
   return (
-    <header>
-      <SignedOut>
-        <SignInButton />
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
+    <Router>
+      <Routes>
+        {/* Public routes */}
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/sign-in"
+          element={
+            <SignedOut>
+              <SignInPage />
+            </SignedOut>
+          }
+        />
+        <Route
+          path="/sign-up"
+          element={
+            <SignedOut>
+              <SignUpPage />
+            </SignedOut>
+          }
+        />
 
-      <Router>
-        <Routes>
-          {/* HomePage Route */}
-          <Route path="/" element={<HomePage />} />
+        {/* Protected routes */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
 
-          {/* Dashboard Route */}
-          <Route
-            path="/dashboard"
-            element={
-              <SignedIn>
-                <Dashboard />
-              </SignedIn>
-            }
-          />
-
-          {/* Profile Route */}
-          <Route
-            path="/profile"
-            element={
-              <SignedIn>
-                <Profile />
-              </SignedIn>
-            }
-          />
-
-          {/* Sign In Route */}
-          <Route
-            path="/sign-in"
-            element={
-              <SignedOut>
-                <SignInPage />
-              </SignedOut>
-            }
-          />
-
-          {/* Sign Up Route */}
-          <Route
-            path="/sign-up"
-            element={
-              <SignedOut>
-                <SignUpPage />
-              </SignedOut>
-            }
-          />
-
-          {/* Redirect unauthenticated to sign-in */}
-          <Route
-            path="*"
-            element={
-              <SignedOut>
-                <RedirectToSignIn />
-              </SignedOut>
-            }
-          />
-        </Routes>
-      </Router>
-    </header>
+        {/* Catch all route */}
+        <Route
+          path="*"
+          element={
+            <SignedOut>
+              <RedirectToSignIn />
+            </SignedOut>
+          }
+        />
+      </Routes>
+    </Router>
   );
 };
 

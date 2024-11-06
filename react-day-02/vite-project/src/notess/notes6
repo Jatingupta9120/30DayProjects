@@ -1,0 +1,30 @@
+import { useEffect, useState } from "react";
+
+export const App = () => {
+  return (
+    <>
+      <Timer />
+    </>
+  );
+}
+
+const Timer = () => {
+  const [time, setTime] = useState(0); // Initialize time to 0
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTime((p) => p + 1);
+    }, 1000);
+    console.log(intervalId,"this is the id")
+    // Cleanup function to clear the interval
+    return () => clearInterval(intervalId);
+  }, []);
+
+  return (
+    <>
+      <div>{time} seconds elapsed</div>
+    </>
+  );
+}
+
+export default App;

@@ -1,0 +1,20 @@
+import { useState } from "react"
+
+export const App=()=>{
+  const [Count,setCount]=useState(1);
+  function addCount(){
+    setCount(Count+1);
+  }
+  return(
+    <>
+    <div style={{display:"flex"}}>
+      <div  style={{background:"red",borderRadius:20, width:20,height:25,paddingLeft:10,paddingTop:5}}>{Count}</div>
+    </div>
+    <img style={{cursor:"pointer"}} src="https://cdn-icons-png.flaticon.com/512/472/472371.png" alt="" width={40}/>
+    <button onClick={addCount}>increment</button>
+    </>
+  )
+}
+
+
+export {App as default}
