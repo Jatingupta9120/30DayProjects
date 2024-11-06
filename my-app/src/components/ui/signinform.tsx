@@ -1,15 +1,15 @@
 "use client";
 import { useAuth, useSignIn } from '@clerk/clerk-react';
-import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import cn from "../lib/utils";
-import Header from "./Header";
-import BackgroundBeams from './ui/background-beams';
-import Input from "./ui/input";
-import Label from "./ui/label";
+import cn from "../../lib/utils";
+import Header from "../Header";
+import Input from "./input";
+import Label from "./label";
+import { IconBrandGithub, IconBrandGoogle } from "@tabler/icons-react";
+import BackgroundBeams from './background-beams';
 
-export const SignInPage = () => {
+export const SignInForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -98,11 +98,12 @@ export const SignInPage = () => {
   };
 
   return (
-    <div className="rgb(0 0 0);">
+    <div className="bg-black-200">
        <Header />
-      <div className="flex items-center justify-center min-h-screen bg-black-200">
+       <BackgroundBeams />
+      <div className="flex items-center justify-center min-h-screen bg-black-50">
         <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
-          <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200 bg-black-200">
+          <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
             Welcome back to Jedex99
           </h2>
           <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
@@ -209,4 +210,4 @@ const BottomGradient = () => {
   );
 };
 
-export { SignInPage as default };
+export { SignInForm as default };

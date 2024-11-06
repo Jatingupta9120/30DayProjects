@@ -1,5 +1,5 @@
 const style = { width: 200, backgroundColor: "white", borderColor: "gray", borderRadius: 10, borderWidth: 1, display: "flex" }
-export default function PostHandler({name,subtitle,time,image,desc}) {
+export default function PostHandler({name,subtitle,time,image}) {
     return (
       <>
         <div style={style}>

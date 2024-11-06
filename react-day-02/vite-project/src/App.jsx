@@ -1,49 +1,37 @@
-import { useState } from "react";
-import PostHandler from "./posts";
+import { useEffect, useState } from "react"
 
-export default function App() {
-  const [posts, setPosts] = useState([]); 
+export const Component = () => {
+  const [ct, setct] = useState(0);
 
-  const postComponents = posts.map((p, index) => (
-    <PostHandler 
-      key={index}
-      name={p.name}
-      subtitle={p.subtitle}
-      time={p.time}
-      image={p.image} 
-    />
-  ));
+  useEffect(() => {
+    console.log("component mounted")
+    return () => {
+      console.log("component will unmount");
+    }
+  }, []);
 
-  function addPost() {
-    setPosts([...posts, {
-      name: "lksdnflnsvd Gupta",
-      subtitle: "Main hun Jatin",
-      time: "20s ago",
-      image: "/dsnvkjvbksnlvbsbvs/"
-    },{
-      name: "dsjfkbvkjsbjkvsdn",
-      subtitle: "Main hun Jatin",
-      time: "20s ago",
-      image: "/dsnvkjvbksnlvbsbvs/"
-    },
-    {
-      name: "ghjkl;kjhgjhk Gupta",
-      subtitle: "Main hun Jatin",
-      time: "20s ago",
-      image: "/dsnvkjvbksnlvbsbvs/"
-    }]);
-  }
+  useEffect(() => {
+    console.log("component will be changing")
+  }, [ct]);
+
+
 
   return (
     <>
-      <div style={{ background: "#dfe6e9", height: "100vh" }}>
-        <button onClick={addPost}>Add Posts</button>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <div>
-            {postComponents}
-          </div>
-        </div>
-      </div>
+      <p>{ct}</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus illo, perspiciatis blanditiis provident libero eligendi. Vitae consectetur veritatis ratione commodi facilis magnam obcaecati cumque quos hic, iure quam esse optio.</p>
+      <button onClick={() => setct(ct + 1)}>Increment</button>
     </>
-  );
+  )
 }
+const App = () => {
+
+  const [show,setShow]=useState(true);
+  return (
+    <>
+      {show&&<Component />}
+    </>
+  )
+}
+
+export { App as default }
