@@ -1,0 +1,37 @@
+import { useEffect, useState } from "react"
+
+export const Component = () => {
+  const [ct, setct] = useState(0);
+
+  useEffect(() => {
+    console.log("component mounted")
+    return () => {
+      console.log("component will unmount");
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log("component will be changing")
+  }, [ct]);
+
+
+
+  return (
+    <>
+      <p>{ct}</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus illo, perspiciatis blanditiis provident libero eligendi. Vitae consectetur veritatis ratione commodi facilis magnam obcaecati cumque quos hic, iure quam esse optio.</p>
+      <button onClick={() => setct(ct + 1)}>Increment</button>
+    </>
+  )
+}
+const App = () => {
+
+  const [show,setShow]=useState(true);
+  return (
+    <>
+      {show&&<Component />}
+    </>
+  )
+}
+
+export { App as default }
