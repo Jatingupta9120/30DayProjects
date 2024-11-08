@@ -1,0 +1,91 @@
+import { BrowserRouter, Routes, Route, Outlet, Link, useNavigate } from 'react-router-dom';
+const App = () => {
+    return (
+
+        <>
+
+            <BrowserRouter>
+
+                <Routes>
+
+                    <Route path="/" element={<Layout />}>
+                        <Route path='/hello' element={<Hello />} />
+                        <Route path='/game' element={<Game />} />
+                        <Route path='/news' element={<News />} />
+                    </Route>
+
+                </Routes>
+
+            </BrowserRouter>
+
+        </>
+    )
+}
+
+const News = () => {
+    return (
+        <>
+            <div>I am Reading News</div>
+        </>
+    )
+}
+const Hello = () => {
+    return (
+        <>
+            <div>Hello Jatin</div>
+        </>
+    )
+}
+const Game = () => {
+    return (
+        <>
+            <div>Hi i m Game</div>
+        </>
+    )
+}
+
+const Layout = () => {
+    return (
+        <div style={{ height: "100vh" }}>
+            <Header />
+            <div style={{ height: "90vh", backgroundColor: "red" }}>
+                <Outlet />
+            </div>
+            <Footer />
+        </div>
+    )
+}
+
+const Header = () => {
+    return (
+        <>
+            <div>
+                <Link to="/hello">Hello</Link>|
+                <Link to="/news">News</Link>|
+                <Link to="/game">Game</Link>
+            </div>
+
+            <div>Hi I am a Header</div>
+        </>
+    )
+}
+
+const Footer = () => {
+    
+    const navigate = useNavigate();
+
+    const redirect = () => {
+        navigate("/game");
+    };
+
+    return (
+        <>
+            <button onClick={redirect}>Game</button>
+            <div>Hi I am a Footer</div>
+        </>
+    )
+}
+
+
+
+export default App;
