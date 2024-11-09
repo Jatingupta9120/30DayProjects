@@ -1,51 +1,55 @@
-//use Context
+import { createContext, useContext, useState } from "react";
 
-import { createContext, useContext, useState } from "react"
+const CountContext = createContext(); // Create a Context
 
-/*what happen it is like a table where all the skills were putten down who avenger need they can just take it and use and put it down 
-there are some steps like first we have to create a context
-const a=createContext();
-step2
-the data we want to pass from one comp to another we have to wrap the componet using 
-<a.Provider></a.Provider> like this so that 
-and after that in step 3
-const {bulb}=useContext(a); and thats all */
-const bulbContext = createContext();
 export const App = () => {
-    const [bulbOn, setBulb] = useState(false);
-    return (
-       <bulbContext.Provider value={{bulbOn,setBulb}}> 
-            <Light />
-       </bulbContext.Provider>
-    )
-}
-const Light = () => {
     return (
         <>
-        
-                <LightBulb />
-                <LightSwitch />
+            <Parent />
         </>
-    )
+    );
 }
 
-const LightBulb = () => {
-    const { bulbOn } = useContext(bulbContext);
+export const CountContextProvider = ({ children }) => {
+    const [count, setCount] = useState(0); // State for count
     return (
-        <>
-            {bulbOn ? "Bulb On" : "Bulb Off"}
-        </>
-    )
+        <CountContext.Provider value={{ count, setCount }}>
+            {children}
+        </CountContext.Provider>
+    );
 }
-const LightSwitch = () => {
-    const { bulbOn, setBulb } = useContext(bulbContext);
-    function Toggle() {
-        setBulb(!bulbOn);
-    }
+
+export const Value = () => {
+    const { count } = useContext(CountContext); // Access count from context
     return (
-        <>
-            <button onClick={Toggle}>Toggle</button>
-        </>
-    )
+        <div>
+            Current Count: {count} {/* Return count within a div */}
+        </div>
+    );
 }
+
+export const Increase = () => {
+    const { setCount } = useContext(CountContext); // Access setCount from context
+    return (
+        <button onClick={() => setCount(c => c + 1)}>Increase</button>
+    );
+}
+
+export const Decrease = () => {
+    const { setCount } = useContext(CountContext); // Access setCount from context
+    return (
+        <button onClick={() => setCount(c => c - 1)}>Decrease</button>
+    );
+}
+
+export const Parent = () => {
+    return (
+        <CountContextProvider>
+            <Increase />
+            <Decrease />
+            <Value />
+        </CountContextProvider>
+    );
+}
+
 export default App;
